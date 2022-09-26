@@ -18,7 +18,13 @@ export class GifsService {
   //TODO: cambiar any por su tipo correspondiente
   public resultados: Gif[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    /* if (localStorage.getItem('gifsHistorial')) {
+      this._historial = JSON.parse(localStorage.getItem('gifsHistorial')!);
+    } */
+    /* OTRA FORMA MAS CORTA*/
+    this._historial = JSON.parse(localStorage.getItem('gifsHistorial')!) || [];
+  }
 
   /* async */ buscarGifts(query: string = '') {
     query = query.trim().toLowerCase();
@@ -26,6 +32,8 @@ export class GifsService {
     if (!this._historial.includes(query)) {
       this._historial.unshift(query);
       this._historial = this._historial.splice(0, 10);
+
+      localStorage.setItem('gifsHistorial', JSON.stringify(this._historial));
     }
     /* CON FETCH JS */
     // fetch(
