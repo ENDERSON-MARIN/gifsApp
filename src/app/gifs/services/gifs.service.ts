@@ -24,6 +24,7 @@ export class GifsService {
     } */
     /* OTRA FORMA MAS CORTA*/
     this._historial = JSON.parse(localStorage.getItem('gifsHistorial')!) || [];
+    this.resultados = JSON.parse(localStorage.getItem('gifsResultados')!) || [];
   }
 
   /* async */ buscarGifts(query: string = '') {
@@ -61,6 +62,7 @@ export class GifsService {
       .subscribe((resp) => {
         console.log(resp.data);
         this.resultados = resp.data;
+        localStorage.setItem('gifsResultados', JSON.stringify(this.resultados));
       });
   }
 }
