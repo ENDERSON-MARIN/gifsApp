@@ -32,7 +32,7 @@ export class GifsService {
 
     if (!this._historial.includes(query)) {
       this._historial.unshift(query);
-      this._historial = this._historial.splice(0, 10);
+      this._historial = this._historial.splice(0, 12);
 
       localStorage.setItem('gifsHistorial', JSON.stringify(this._historial));
     }
