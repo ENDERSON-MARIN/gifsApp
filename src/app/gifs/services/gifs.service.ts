@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -12,6 +12,9 @@ export class GifsService {
   get historial() {
     return [...this._historial];
   }
+
+  //TODO: cambiar any por su tipo correspondiente
+  public resultados: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -43,10 +46,11 @@ export class GifsService {
 
     this.http
       .get(
-        'https://api.giphy.com/v1/gifs/search?api_key=B3gI67y5Y8n4paPJIpZQ04g2HdwcG5zm&q=dragon ball z&limit=10'
+        `https://api.giphy.com/v1/gifs/search?api_key=B3gI67y5Y8n4paPJIpZQ04g2HdwcG5zm&q=${query}&limit=10`
       )
-      .subscribe((resp:any) => {
+      .subscribe((resp: any) => {
         console.log(resp.data);
+        this.resultados = resp.data;
       });
   }
 }
